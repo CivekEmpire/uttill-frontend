@@ -28,7 +28,7 @@ export function Header() {
               <div
                 key={item.name}
                 className="relative"
-                onMouseEnter={() => item.submenu && setActiveSubmenu(item.name)}
+                onMouseEnter={() => 'submenu' in item && item.submenu && setActiveSubmenu(item.name)}
                 onMouseLeave={() => setActiveSubmenu(null)}
               >
                 <Link
@@ -36,11 +36,11 @@ export function Header() {
                   className="text-text-secondary hover:text-gold-primary transition-colors duration-200"
                 >
                   {item.name}
-                  {item.submenu && <span className="ml-1">▼</span>}
+                  {'submenu' in item && item.submenu && <span className="ml-1">▼</span>}
                 </Link>
 
                 {/* Submenu */}
-                {item.submenu && activeSubmenu === item.name && (
+                {'submenu' in item && item.submenu && activeSubmenu === item.name && (
                   <div className="absolute top-full left-0 mt-2 w-64 bg-bg-secondary border border-bg-tertiary rounded-lg shadow-xl p-2">
                     {item.submenu.map((subitem) => (
                       <Link
@@ -92,7 +92,7 @@ export function Header() {
                 >
                   {item.name}
                 </Link>
-                {item.submenu && (
+                {'submenu' in item && item.submenu && (
                   <div className="ml-4 mt-2 space-y-2">
                     {item.submenu.map((subitem) => (
                       <Link

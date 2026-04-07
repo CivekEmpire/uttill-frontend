@@ -7,6 +7,10 @@ if (!SHOPIFY_STORE_DOMAIN || !SHOPIFY_STOREFRONT_ACCESS_TOKEN) {
 
 const SHOPIFY_GRAPHQL_URL = `https://${SHOPIFY_STORE_DOMAIN}/api/2024-01/graphql.json`;
 
+// Type-safe exports after env check
+const SHOPIFY_STORE = SHOPIFY_STORE_DOMAIN as string;
+const SHOPIFY_TOKEN = SHOPIFY_STOREFRONT_ACCESS_TOKEN as string;
+
 export async function shopifyFetch<T>({
   query,
   variables = {},
@@ -20,7 +24,7 @@ export async function shopifyFetch<T>({
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_ACCESS_TOKEN,
+      'X-Shopify-Storefront-Access-Token': SHOPIFY_TOKEN,
     },
     body: JSON.stringify({ query, variables }),
     cache,

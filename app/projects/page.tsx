@@ -48,7 +48,9 @@ export default function ProjectsPage() {
       {/* Placeholder Grid */}
       <div className="grid md:grid-cols-3 gap-6 mt-12">
         {[1, 2, 3, 4, 5, 6].map((i) => (
-          <Card key={i} className="aspect-square bg-bg-secondary animate-shimmer" />
+          <Card key={i} className="aspect-square bg-bg-secondary animate-shimmer">
+            <div className="h-full" />
+          </Card>
         ))}
       </div>
     </div>
