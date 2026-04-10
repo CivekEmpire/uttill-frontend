@@ -1,40 +1,14 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
+import { ParticleHero } from '@/components/hero/ParticleHero';
 import { CATEGORIES, COLLECTIONS } from '@/lib/constants/categories';
 
 export default function HomePage() {
   return (
     <div>
-      {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-bg-primary via-bg-secondary to-bg-primary opacity-90" />
-
-        <div className="container relative z-10 text-center">
-          <h1 className="text-6xl md:text-8xl font-bold mb-6 text-gradient gold-glow animate-fade-in">
-            UTTILL
-          </h1>
-          <p className="text-2xl md:text-4xl text-text-secondary mb-4 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            Life, beautifully lived
-          </p>
-          <p className="text-lg md:text-xl text-text-tertiary mb-12 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            Materiales premium para espacios extraordinarios.<br />
-            Pisos de lujo, piedra flexible, y productos wellness.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in" style={{ animationDelay: '0.6s' }}>
-            <Link href="/shop">
-              <Button variant="primary" size="lg">
-                Explorar Catálogo
-              </Button>
-            </Link>
-            <Link href="/projects">
-              <Button variant="outline" size="lg">
-                Ver Proyectos
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Hero Section with Particle Animation */}
+      <ParticleHero />
 
       {/* Categories Section */}
       <section className="container py-24">

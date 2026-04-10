@@ -2,7 +2,6 @@
 
 import { Suspense, lazy } from 'react';
 import { motion } from 'framer-motion';
-import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 
@@ -24,8 +23,6 @@ const ParticleCanvas = lazy(() => import('./ParticleCanvas'));
  * - GPU-accelerated WebGL
  */
 export function ParticleHero() {
-  const t = useTranslations('hero');
-
   return (
     <section className="relative h-screen overflow-hidden bg-gradient-to-br from-bg-primary via-bg-secondary to-bg-primary">
       {/* Three.js Particle Background (Desktop only) */}
@@ -56,7 +53,7 @@ export function ParticleHero() {
             transition={{ delay: 4.5, duration: 0.8 }}
             className="text-6xl md:text-8xl lg:text-9xl font-bold mb-6 text-gradient gold-glow"
           >
-            {t('title')}
+            UTTILL
           </motion.h1>
 
           {/* Subtitle */}
@@ -66,7 +63,7 @@ export function ParticleHero() {
             transition={{ delay: 5, duration: 0.8 }}
             className="text-2xl md:text-4xl lg:text-5xl text-text-secondary mb-4 font-light"
           >
-            {t('subtitle')}
+            Life, beautifully lived
           </motion.p>
 
           {/* Description */}
@@ -76,7 +73,7 @@ export function ParticleHero() {
             transition={{ delay: 5.5, duration: 0.8 }}
             className="text-lg md:text-xl lg:text-2xl text-text-tertiary mb-12 max-w-3xl mx-auto leading-relaxed"
           >
-            {t('description')}
+            Materiales premium para espacios extraordinarios. Pisos de lujo, piedra flexible, y productos wellness.
           </motion.p>
 
           {/* CTAs with stagger animation */}
@@ -88,12 +85,12 @@ export function ParticleHero() {
           >
             <Link href="/shop">
               <Button variant="primary" size="lg" className="min-w-[200px]">
-                {t('ctaExplore')}
+                Explorar Catálogo
               </Button>
             </Link>
             <Link href="/projects">
               <Button variant="outline" size="lg" className="min-w-[200px]">
-                {t('ctaProjects')}
+                Ver Proyectos
               </Button>
             </Link>
           </motion.div>

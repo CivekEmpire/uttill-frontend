@@ -2,10 +2,14 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { Menu, Search, ShoppingCart } from 'lucide-react';
+import { MenuDrawer } from '@/components/navigation/MenuDrawer';
+import { SearchBar } from '@/components/navigation/SearchBar';
 import { NAVIGATION } from '@/lib/constants/categories';
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
 
   return (
@@ -57,60 +61,57 @@ export function Header() {
             ))}
           </div>
 
-          {/* Cart Icon */}
+          {/* Actions */}
           <div className="flex items-center space-x-4">
-            <button className="relative p-2 text-text-secondary hover:text-gold-primary transition-colors">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
+            {/* Search Button */}
+            <button
+              onClick={() => setSearchOpen(true)}
+              className="p-2 text-text-secondary hover:text-gold-primary transition-colors"
+              aria-label="Search"
+            >
+              <Search className="w-6 h-6" />
+            </button>
+
+            {/* Cart Icon */}
+            <Link
+              href="/cart"
+              className="relative p-2 text-text-secondary hover:text-gold-primary transition-colors"
+            >
+              <ShoppingCart className="w-6 h-6" />
               <span className="absolute -top-1 -right-1 bg-gold-primary text-bg-primary text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
                 0
               </span>
-            </button>
+            </Link>
 
             {/* Mobile Menu Toggle */}
             <button
               className="md:hidden p-2 text-text-secondary hover:text-gold-primary"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              onClick={() => setMobileMenuOpen(true)}
+              aria-label="Menu"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
+              <Menu className="w-6 h-6" />
             </button>
           </div>
         </div>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden mt-4 pt-4 border-t border-bg-tertiary">
-            {NAVIGATION.map((item) => (
-              <div key={item.name} className="mb-2">
-                <Link
-                  href={item.href}
-                  className="block py-2 text-text-secondary hover:text-gold-primary transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-                {'submenu' in item && item.submenu && (
-                  <div className="ml-4 mt-2 space-y-2">
-                    {item.submenu.map((subitem) => (
-                      <Link
-                        key={subitem.name}
-                        href={subitem.href}
-                        className="block py-1 text-sm text-text-tertiary hover:text-gold-primary transition-colors"
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        {subitem.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        )}
       </nav>
+
+      {/* Menu Drawer (Mobile + Desktop) */}
+      <MenuDrawer isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
+
+      {/* Search Bar Overlay */}
+      {searchOpen && (
+        <div className="fixed inset-0 z-[100] bg-bg-primary/95 backdrop-blur-lg">
+          <div className="container mx-auto px-4 py-8">
+            <SearchBar />
+            <button
+              onClick={() => setSearchOpen(false)}
+              className="mt-4 text-text-tertiary hover:text-gold-primary transition-colors"
+            >
+              Cerrar búsqueda (ESC)
+            </button>
+          </div>
+        </div>
+      )}
     </header>
   );
 }

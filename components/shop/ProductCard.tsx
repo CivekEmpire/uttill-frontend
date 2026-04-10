@@ -1,9 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
+import { ProductImage } from '@/components/shop/ProductImage';
 import { formatPrice } from '@/lib/utils/currency';
 import { ShopifyProduct } from '@/lib/shopify/types';
 
@@ -22,9 +22,26 @@ export function ProductCard({ product }: ProductCardProps) {
   // Determinar categoría por tags
   const getCategory = () => {
     if (product.tags.includes('suelux') || product.productType.includes('Floor')) {
+      return 'suelux';
+    }
+    if (product.tags.includes('pietraflex') || product.tags.includes('stone')) {
+      return 'pietraflex';
+    }
+    if (product.tags.includes('drvek') || product.tags.includes('copper')) {
+      return 'drvek';
+    }
+    if (product.tags.includes('sankom') || product.tags.includes('compression')) {
+      return 'sankom';
+    }
+    return 'default';
+  };
+
+  const getCategoryBadge = () => {
+    const category = getCategory();
+    if (category === 'suelux' || category === 'pietraflex') {
       return 'espacios';
     }
-    if (product.tags.includes('drvek') || product.tags.includes('sankom')) {
+    if (category === 'drvek' || category === 'sankom') {
       return 'wellbeing';
     }
     return 'default';
@@ -33,31 +50,23 @@ export function ProductCard({ product }: ProductCardProps) {
   return (
     <Link href={`/products/${product.handle}`}>
       <Card hover className="overflow-hidden group">
-        {/* Image */}
-        <div className="relative aspect-square bg-bg-tertiary overflow-hidden">
-          {firstImage ? (
-            <Image
-              src={firstImage.url}
-              alt={firstImage.altText || product.title}
-              fill
-              className="object-cover group-hover:scale-110 transition-transform duration-300"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center text-text-tertiary">
-              Sin imagen
-            </div>
-          )}
+        {/* Image with ImagineArt Fallback */}
+        <ProductImage
+          shopifyImageUrl={firstImage?.url}
+          productName={product.title}
+          category={getCategory()}
+          alt={firstImage?.altText || product.title}
+          className="aspect-square overflow-hidden"
+        />
 
-          {/* Badges */}
-          <div className="absolute top-2 left-2 flex flex-wrap gap-2">
-            <Badge variant={getCategory()}>
-              {product.vendor || 'UTTILL'}
-            </Badge>
-            {product.tags.includes('new') && (
-              <Badge variant="gold">Nuevo</Badge>
-            )}
-          </div>
+        {/* Badges */}
+        <div className="absolute top-2 left-2 flex flex-wrap gap-2">
+          <Badge variant={getCategoryBadge()}>
+            {product.vendor || 'UTTILL'}
+          </Badge>
+          {product.tags.includes('new') && (
+            <Badge variant="gold">Nuevo</Badge>
+          )}
         </div>
 
         {/* Content */}

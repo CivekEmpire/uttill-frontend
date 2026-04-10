@@ -1,9 +1,9 @@
 'use client';
 
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { X } from 'lucide-react';
+import { X, ChevronDown } from 'lucide-react';
 
 interface Category {
   id: string;
@@ -27,12 +27,12 @@ interface MenuDrawerProps {
  * Slides in from left with category accordion
  */
 export function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
-  const t = useTranslations('navigation');
+  const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
 
   const categories: Category[] = [
     {
       id: 'espacios-vivos',
-      name: t('espaciosVivos'),
+      name: 'Espacios Vivos',
       href: '/shop/espacios-vivos',
       subcategories: [
         {
@@ -51,14 +51,14 @@ export function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
     },
     {
       id: 'wellbeing',
-      name: t('wellbeing'),
+      name: 'Wellbeing',
       href: '/shop/wellbeing',
       subcategories: [
         {
           id: 'drvek',
-          name: 'Dr.Vek',
-          href: '/collections/dr-vek',
-          description: 'Botellas cobre ayurvédicas',
+          name: 'Dr.Vek Ayurvedic',
+          href: '/collections/dr-vek-ayurvedic',
+          description: 'Botellas de cobre',
         },
         {
           id: 'sankom',
@@ -70,31 +70,26 @@ export function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
     },
     {
       id: 'b2b',
-      name: t('b2b'),
+      name: 'Soluciones B2B',
       href: '/b2b',
       subcategories: [
-        { id: 'arquitectos', name: t('arquitectos'), href: '/b2b/arquitectos' },
-        { id: 'constructoras', name: t('constructoras'), href: '/b2b/constructoras' },
-        { id: 'distribuidores', name: t('distribuidores'), href: '/b2b/distribuidores' },
-        { id: 'franquicias', name: t('franquicias'), href: '/b2b/franquicias' },
+        {
+          id: 'arquitectos',
+          name: 'Arquitectos',
+          href: '/b2b/arquitectos',
+        },
+        {
+          id: 'franquicias',
+          name: 'Franquicias',
+          href: '/b2b/franquicias',
+        },
       ],
     },
-    {
-      id: 'projects',
-      name: t('projects'),
-      href: '/projects',
-    },
-    {
-      id: 'about',
-      name: t('about'),
-      href: '/about',
-    },
-    {
-      id: 'contact',
-      name: t('contact'),
-      href: '/contact',
-    },
   ];
+
+  const toggleCategory = (categoryId: string) => {
+    setExpandedCategory(expandedCategory === categoryId ? null : categoryId);
+  };
 
   return (
     <AnimatePresence>
@@ -106,7 +101,7 @@ export function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-40"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[60]"
           />
 
           {/* Drawer */}
@@ -114,145 +109,102 @@ export function MenuDrawer({ isOpen, onClose }: MenuDrawerProps) {
             initial={{ x: '-100%' }}
             animate={{ x: 0 }}
             exit={{ x: '-100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed left-0 top-0 h-full w-80 max-w-[80vw] bg-bg-primary z-50 overflow-y-auto shadow-2xl"
+            transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+            className="fixed top-0 left-0 h-full w-full max-w-sm bg-bg-secondary border-r border-bg-tertiary z-[70] overflow-y-auto"
           >
             {/* Header */}
-            <div className="sticky top-0 bg-bg-primary border-b border-bg-tertiary px-6 py-4 flex items-center justify-between">
-              <h2 className="text-xl font-bold text-gold-primary">
-                {t('menu')}
-              </h2>
+            <div className="flex items-center justify-between p-6 border-b border-bg-tertiary">
+              <h2 className="text-2xl font-bold text-gold-primary">UTTILL</h2>
               <button
                 onClick={onClose}
-                className="p-2 hover:bg-bg-secondary rounded-lg transition-colors"
-                aria-label="Close menu"
+                className="p-2 hover:bg-bg-tertiary rounded-lg transition-colors"
               >
-                <X className="w-6 h-6" />
+                <X className="w-6 h-6 text-text-secondary" />
               </button>
             </div>
 
-            {/* Categories */}
-            <nav className="p-6 space-y-2">
-              {categories.map((category, i) => (
-                <CategoryAccordion
-                  key={category.id}
-                  category={category}
-                  delay={i * 0.05}
-                  onClose={onClose}
-                />
-              ))}
-            </nav>
+            {/* Navigation */}
+            <nav className="p-4">
+              {categories.map((category) => (
+                <div key={category.id} className="mb-2">
+                  <div className="flex items-center justify-between">
+                    <Link
+                      href={category.href}
+                      onClick={onClose}
+                      className="flex-1 px-4 py-3 text-text-primary hover:text-gold-primary transition-colors font-medium"
+                    >
+                      {category.name}
+                    </Link>
+                    {category.subcategories && (
+                      <button
+                        onClick={() => toggleCategory(category.id)}
+                        className="p-3 hover:bg-bg-tertiary rounded-lg transition-colors"
+                      >
+                        <ChevronDown
+                          className={`w-5 h-5 text-text-tertiary transition-transform ${
+                            expandedCategory === category.id ? 'rotate-180' : ''
+                          }`}
+                        />
+                      </button>
+                    )}
+                  </div>
 
-            {/* Footer */}
-            <div className="px-6 py-4 border-t border-bg-tertiary mt-8">
-              <p className="text-sm text-text-tertiary">
-                © 2026 UTTILL S.A.
-              </p>
-              <p className="text-xs text-text-tertiary mt-1">
-                Part of CIVEK Empire
-              </p>
-            </div>
+                  {/* Subcategories */}
+                  {category.subcategories && expandedCategory === category.id && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      className="ml-4 mt-2 space-y-1"
+                    >
+                      {category.subcategories.map((sub) => (
+                        <Link
+                          key={sub.id}
+                          href={sub.href}
+                          onClick={onClose}
+                          className="block px-4 py-2 text-sm text-text-secondary hover:text-gold-primary hover:bg-bg-tertiary rounded-lg transition-colors"
+                        >
+                          <div className="font-medium">{sub.name}</div>
+                          {sub.description && (
+                            <div className="text-xs text-text-tertiary mt-0.5">
+                              {sub.description}
+                            </div>
+                          )}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </div>
+              ))}
+
+              {/* Additional Links */}
+              <div className="mt-6 pt-6 border-t border-bg-tertiary space-y-2">
+                <Link
+                  href="/projects"
+                  onClick={onClose}
+                  className="block px-4 py-3 text-text-primary hover:text-gold-primary transition-colors"
+                >
+                  Proyectos
+                </Link>
+                <Link
+                  href="/about"
+                  onClick={onClose}
+                  className="block px-4 py-3 text-text-primary hover:text-gold-primary transition-colors"
+                >
+                  Nosotros
+                </Link>
+                <Link
+                  href="/contact"
+                  onClick={onClose}
+                  className="block px-4 py-3 text-text-primary hover:text-gold-primary transition-colors"
+                >
+                  Contacto
+                </Link>
+              </div>
+            </nav>
           </motion.div>
         </>
       )}
     </AnimatePresence>
   );
 }
-
-/**
- * Category Accordion Item
- */
-function CategoryAccordion({
-  category,
-  delay,
-  onClose,
-}: {
-  category: Category;
-  delay: number;
-  onClose: () => void;
-}) {
-  const [isExpanded, setIsExpanded] = React.useState(false);
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ delay }}
-    >
-      {/* Main category */}
-      <div className="group">
-        {category.subcategories ? (
-          <button
-            onClick={() => setIsExpanded(!isExpanded)}
-            className="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-bg-secondary transition-colors text-left"
-          >
-            <span className="text-text-primary font-medium group-hover:text-gold-primary transition-colors">
-              {category.name}
-            </span>
-            <motion.svg
-              animate={{ rotate: isExpanded ? 180 : 0 }}
-              transition={{ duration: 0.2 }}
-              className="w-5 h-5 text-text-tertiary"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 9l-7 7-7-7"
-              />
-            </motion.svg>
-          </button>
-        ) : (
-          <Link
-            href={category.href}
-            onClick={onClose}
-            className="block px-4 py-3 rounded-lg hover:bg-bg-secondary transition-colors"
-          >
-            <span className="text-text-primary font-medium group-hover:text-gold-primary transition-colors">
-              {category.name}
-            </span>
-          </Link>
-        )}
-
-        {/* Subcategories */}
-        <AnimatePresence>
-          {isExpanded && category.subcategories && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="overflow-hidden"
-            >
-              <div className="ml-4 mt-2 space-y-1 border-l-2 border-bg-tertiary pl-4">
-                {category.subcategories.map((sub) => (
-                  <Link
-                    key={sub.id}
-                    href={sub.href}
-                    onClick={onClose}
-                    className="block py-2 px-3 rounded-lg hover:bg-bg-secondary transition-colors group/sub"
-                  >
-                    <div className="text-sm text-text-secondary group-hover/sub:text-gold-primary transition-colors font-medium">
-                      {sub.name}
-                    </div>
-                    {sub.description && (
-                      <div className="text-xs text-text-tertiary mt-0.5">
-                        {sub.description}
-                      </div>
-                    )}
-                  </Link>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    </motion.div>
-  );
-}
-
-// Fix: Import React
-import React from 'react';
