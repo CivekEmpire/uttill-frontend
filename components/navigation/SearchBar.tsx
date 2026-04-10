@@ -5,14 +5,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Search, X } from 'lucide-react';
+import { fetchPredictiveSearch, formatSearchProduct } from '@/lib/shopify/search';
 
 interface SearchResult {
   id: string;
   title: string;
   handle: string;
-  price: string;
-  image?: string;
-  category?: string;
+  price: number;
+  currencyCode: string;
+  image: string;
+  url: string;
 }
 
 /**
@@ -47,8 +49,9 @@ export function SearchBar() {
     setIsLoading(true);
     const timeoutId = setTimeout(async () => {
       try {
-        const searchResults = await fetchPredictiveSearch(query);
-        setResults(searchResults);
+        const { products } = await fetchPredictiveSearch(query, 8);
+        const formatted = products.map(formatSearchProduct);
+        setResults(formatted);
         setIsLoading(false);
       } catch (error) {
         console.error('Search error:', error);
@@ -162,12 +165,9 @@ export function SearchBar() {
                       <h3 className="text-text-primary font-medium truncate">
                         {result.title}
                       </h3>
-                      {result.category && (
-                        <p className="text-xs text-text-tertiary">{result.category}</p>
-                      )}
                     </div>
                     <div className="text-gold-primary font-mono font-bold">
-                      {result.price}
+                      ${result.price.toFixed(2)} {result.currencyCode}
                     </div>
                   </Link>
                 ))}
@@ -178,13 +178,4 @@ export function SearchBar() {
       </AnimatePresence>
     </div>
   );
-}
-
-/**
- * Fetch predictive search results from Shopify
- */
-async function fetchPredictiveSearch(query: string): Promise<SearchResult[]> {
-  // TODO: Implement actual Shopify Predictive Search API
-  // For now, return mock data
-  return [];
 }
