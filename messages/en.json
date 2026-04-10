@@ -1,0 +1,143 @@
+{
+  "common": {
+    "uttill": "UTTILL",
+    "tagline": "Life, beautifully lived",
+    "description": "Premium materials for extraordinary spaces",
+    "learnMore": "Learn more",
+    "shopNow": "Shop now",
+    "viewDetails": "View details",
+    "addToCart": "Add to cart",
+    "search": "Search products...",
+    "cart": "Cart",
+    "login": "Login",
+    "logout": "Logout",
+    "account": "My account",
+    "menu": "Menu"
+  },
+
+  "navigation": {
+    "home": "Home",
+    "shop": "Shop",
+    "espaciosVivos": "Living Spaces",
+    "wellbeing": "Wellbeing",
+    "b2b": "B2B Solutions",
+    "projects": "Projects",
+    "about": "About",
+    "contact": "Contact",
+    "arquitectos": "Architects",
+    "constructoras": "Construction Companies",
+    "distribuidores": "International Distributors",
+    "franquicias": "Franchises"
+  },
+
+  "categories": {
+    "espaciosVivos": {
+      "name": "Living Spaces",
+      "description": "Premium flooring and flexible stone cladding",
+      "suelux": "Suelux",
+      "sueluxDescription": "Premium flooring",
+      "pietraFlex": "PietraFlex",
+      "pietraFlexDescription": "Flexible stone"
+    },
+    "wellbeing": {
+      "name": "Wellbeing",
+      "description": "Products for health and wellness",
+      "drVek": "Dr.Vek",
+      "drVekDescription": "Ayurvedic copper bottles",
+      "sankom": "Sankom",
+      "sankomDescription": "Smart compression"
+    }
+  },
+
+  "hero": {
+    "title": "UTTILL",
+    "subtitle": "Life, beautifully lived",
+    "description": "Premium materials for extraordinary spaces. Luxury flooring, flexible stone, and wellness products.",
+    "ctaExplore": "Explore Catalog",
+    "ctaProjects": "View Projects"
+  },
+
+  "features": {
+    "title": "Why UTTILL?",
+    "quality": {
+      "title": "Premium Quality",
+      "description": "Only the finest materials selected for your home"
+    },
+    "price": {
+      "title": "Best Price",
+      "description": "Direct import, no middlemen"
+    },
+    "expert": {
+      "title": "Expert Advisory",
+      "description": "Specialized team for your project"
+    }
+  },
+
+  "cta": {
+    "title": "Ready to transform your space?",
+    "description": "Contact our B2B team for commercial projects or explore our complete catalog",
+    "b2bSolutions": "B2B Solutions",
+    "contact": "Contact"
+  },
+
+  "footer": {
+    "tagline": "Premium materials for extraordinary spaces",
+    "shop": "Shop",
+    "company": "Company",
+    "contactTitle": "Contact",
+    "location": "Costa Rica",
+    "phone": "+506 8410 5999",
+    "whatsapp": "WhatsApp",
+    "email": "info@uttill.com",
+    "copyright": "© {year} UTTILL S.A. — Part of CIVEK Empire"
+  },
+
+  "product": {
+    "new": "New",
+    "sale": "Sale",
+    "outOfStock": "Out of stock",
+    "inStock": "In stock",
+    "price": "Price",
+    "quantity": "Quantity",
+    "addToCart": "Add to Cart",
+    "buyNow": "Buy Now",
+    "description": "Description",
+    "specifications": "Specifications",
+    "installation": "Installation",
+    "reviews": "Reviews",
+    "relatedProducts": "Related Products",
+    "combinesWith": "Pairs perfectly with..."
+  },
+
+  "cart": {
+    "title": "Shopping Cart",
+    "empty": "Your cart is empty",
+    "continueShopping": "Continue shopping",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "total": "Total",
+    "checkout": "Checkout",
+    "removeItem": "Remove"
+  },
+
+  "b2b": {
+    "title": "B2B Solutions",
+    "subtitle": "Strategic partnerships for professionals",
+    "arquitectos": {
+      "title": "Architects",
+      "description": "Premium materials for residential and commercial projects"
+    },
+    "constructoras": {
+      "title": "Construction Companies",
+      "description": "Special pricing for volume and dedicated technical advisory"
+    },
+    "distribuidores": {
+      "title": "International Distributors",
+      "description": "Global expansion with complete support"
+    },
+    "franquicias": {
+      "title": "Franchises",
+      "description": "Proven business model ready to replicate"
+    }
+  }
+}

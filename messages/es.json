@@ -1,0 +1,143 @@
+{
+  "common": {
+    "uttill": "UTTILL",
+    "tagline": "Life, beautifully lived",
+    "description": "Materiales premium para espacios extraordinarios",
+    "learnMore": "Saber más",
+    "shopNow": "Comprar ahora",
+    "viewDetails": "Ver detalles",
+    "addToCart": "Agregar al carrito",
+    "search": "Buscar productos...",
+    "cart": "Carrito",
+    "login": "Iniciar sesión",
+    "logout": "Cerrar sesión",
+    "account": "Mi cuenta",
+    "menu": "Menú"
+  },
+
+  "navigation": {
+    "home": "Inicio",
+    "shop": "Tienda",
+    "espaciosVivos": "Espacios Vivos",
+    "wellbeing": "Wellbeing",
+    "b2b": "Soluciones B2B",
+    "projects": "Proyectos",
+    "about": "Nosotros",
+    "contact": "Contacto",
+    "arquitectos": "Arquitectos",
+    "constructoras": "Constructoras",
+    "distribuidores": "Distribuidores Internacionales",
+    "franquicias": "Franquicias"
+  },
+
+  "categories": {
+    "espaciosVivos": {
+      "name": "Espacios Vivos",
+      "description": "Pisos premium y revestimientos de piedra flexible",
+      "suelux": "Suelux",
+      "sueluxDescription": "Pisos premium",
+      "pietraFlex": "PietraFlex",
+      "pietraFlexDescription": "Piedra flexible"
+    },
+    "wellbeing": {
+      "name": "Wellbeing",
+      "description": "Productos para bienestar y salud",
+      "drVek": "Dr.Vek",
+      "drVekDescription": "Botellas cobre ayurvédicas",
+      "sankom": "Sankom",
+      "sankomDescription": "Compresión inteligente"
+    }
+  },
+
+  "hero": {
+    "title": "UTTILL",
+    "subtitle": "Life, beautifully lived",
+    "description": "Materiales premium para espacios extraordinarios. Pisos de lujo, piedra flexible, y productos wellness.",
+    "ctaExplore": "Explorar Catálogo",
+    "ctaProjects": "Ver Proyectos"
+  },
+
+  "features": {
+    "title": "¿Por qué UTTILL?",
+    "quality": {
+      "title": "Premium Quality",
+      "description": "Solo los mejores materiales seleccionados para tu hogar"
+    },
+    "price": {
+      "title": "Mejor Precio",
+      "description": "Importación directa, sin intermediarios"
+    },
+    "expert": {
+      "title": "Asesoría Expert",
+      "description": "Equipo especializado para tu proyecto"
+    }
+  },
+
+  "cta": {
+    "title": "¿Listo para transformar tu espacio?",
+    "description": "Contacta con nuestro equipo B2B para proyectos comerciales o explora nuestro catálogo completo",
+    "b2bSolutions": "Soluciones B2B",
+    "contact": "Contactar"
+  },
+
+  "footer": {
+    "tagline": "Materiales premium para espacios extraordinarios",
+    "shop": "Tienda",
+    "company": "Empresa",
+    "contactTitle": "Contacto",
+    "location": "Costa Rica",
+    "phone": "+506 8410 5999",
+    "whatsapp": "WhatsApp",
+    "email": "info@uttill.com",
+    "copyright": "© {year} UTTILL S.A. — Part of CIVEK Empire"
+  },
+
+  "product": {
+    "new": "Nuevo",
+    "sale": "Oferta",
+    "outOfStock": "Agotado",
+    "inStock": "En stock",
+    "price": "Precio",
+    "quantity": "Cantidad",
+    "addToCart": "Agregar al Carrito",
+    "buyNow": "Comprar Ahora",
+    "description": "Descripción",
+    "specifications": "Especificaciones",
+    "installation": "Instalación",
+    "reviews": "Reseñas",
+    "relatedProducts": "Productos Relacionados",
+    "combinesWith": "Combina perfecto con..."
+  },
+
+  "cart": {
+    "title": "Carrito de Compras",
+    "empty": "Tu carrito está vacío",
+    "continueShopping": "Continuar comprando",
+    "subtotal": "Subtotal",
+    "shipping": "Envío",
+    "total": "Total",
+    "checkout": "Finalizar Compra",
+    "removeItem": "Eliminar"
+  },
+
+  "b2b": {
+    "title": "Soluciones B2B",
+    "subtitle": "Alianzas estratégicas para profesionales",
+    "arquitectos": {
+      "title": "Arquitectos",
+      "description": "Materiales premium para proyectos residenciales y comerciales"
+    },
+    "constructoras": {
+      "title": "Constructoras",
+      "description": "Precios especiales por volumen y asesoría técnica dedicada"
+    },
+    "distribuidores": {
+      "title": "Distribuidores Internacionales",
+      "description": "Expansión global con soporte completo"
+    },
+    "franquicias": {
+      "title": "Franquicias",
+      "description": "Modelo de negocio probado listo para replicar"
+    }
+  }
+}
