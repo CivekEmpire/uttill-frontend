@@ -6,8 +6,10 @@ import { Menu, Search, ShoppingCart } from 'lucide-react';
 import { MenuDrawer } from '@/components/navigation/MenuDrawer';
 import { SearchBar } from '@/components/navigation/SearchBar';
 import { NAVIGATION } from '@/lib/constants/categories';
+import { useCart } from '@/contexts/CartContext';
 
 export function Header() {
+  const { itemCount, openCart } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
@@ -73,15 +75,18 @@ export function Header() {
             </button>
 
             {/* Cart Icon */}
-            <Link
-              href="/cart"
+            <button
+              onClick={openCart}
               className="relative p-2 text-text-secondary hover:text-gold-primary transition-colors"
+              aria-label="Open cart"
             >
               <ShoppingCart className="w-6 h-6" />
-              <span className="absolute -top-1 -right-1 bg-gold-primary text-bg-primary text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                0
-              </span>
-            </Link>
+              {itemCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-gold-primary text-bg-primary text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                  {itemCount}
+                </span>
+              )}
+            </button>
 
             {/* Mobile Menu Toggle */}
             <button

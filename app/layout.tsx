@@ -3,6 +3,8 @@ import { Inter, Space_Mono } from 'next/font/google';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { GrainOverlay } from '@/components/layout/GrainOverlay';
+import { CartProvider } from '@/contexts/CartContext';
+import { CartDrawer } from '@/components/cart/CartDrawer';
 import './globals.css';
 
 const inter = Inter({
@@ -42,12 +44,15 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${inter.variable} ${spaceMono.variable}`}>
       <body>
-        <GrainOverlay />
-        <Header />
-        <main className="min-h-screen">
-          {children}
-        </main>
-        <Footer />
+        <CartProvider>
+          <GrainOverlay />
+          <Header />
+          <main className="min-h-screen">
+            {children}
+          </main>
+          <Footer />
+          <CartDrawer />
+        </CartProvider>
       </body>
     </html>
   );

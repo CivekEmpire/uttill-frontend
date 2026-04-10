@@ -1,23 +1,38 @@
 'use client';
 
 import Link from 'next/link';
+import { ShoppingCart } from 'lucide-react';
 import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
+import { Button } from '@/components/ui/Button';
 import { ProductImage } from '@/components/shop/ProductImage';
 import { formatPrice } from '@/lib/utils/currency';
 import { ShopifyProduct } from '@/lib/shopify/types';
+import { useCart } from '@/contexts/CartContext';
 
 interface ProductCardProps {
   product: ShopifyProduct;
 }
 
 export function ProductCard({ product }: ProductCardProps) {
+  const { addToCart, isLoading } = useCart();
   const firstImage = product.images.edges[0]?.node;
   const minPrice = parseFloat(product.priceRange.minVariantPrice.amount);
   const maxPrice = parseFloat(product.priceRange.maxVariantPrice.amount);
   const priceDisplay = minPrice === maxPrice
     ? formatPrice(product.priceRange.minVariantPrice.amount, product.priceRange.minVariantPrice.currencyCode)
     : `Desde ${formatPrice(product.priceRange.minVariantPrice.amount, product.priceRange.minVariantPrice.currencyCode)}`;
+
+  // Get first available variant
+  const firstVariant = product.variants.edges[0]?.node;
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault(); // Prevent Link navigation
+    e.stopPropagation();
+    if (firstVariant?.id) {
+      addToCart(firstVariant.id, 1);
+    }
+  };
 
   // Determinar categoría por tags
   const getCategory = () => {
@@ -81,7 +96,7 @@ export function ProductCard({ product }: ProductCardProps) {
             </p>
           )}
 
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between mb-3">
             <span className="text-xl font-mono font-bold text-gold-primary">
               {priceDisplay}
             </span>
@@ -92,6 +107,18 @@ export function ProductCard({ product }: ProductCardProps) {
               </span>
             )}
           </div>
+
+          {/* Add to Cart Button */}
+          <Button
+            variant="primary"
+            size="sm"
+            className="w-full"
+            onClick={handleAddToCart}
+            disabled={isLoading || !firstVariant?.availableForSale}
+          >
+            <ShoppingCart className="w-4 h-4 mr-2" />
+            {firstVariant?.availableForSale ? 'Add to Cart' : 'Out of Stock'}
+          </Button>
         </div>
       </Card>
     </Link>
