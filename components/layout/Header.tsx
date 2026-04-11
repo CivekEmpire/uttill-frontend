@@ -2,9 +2,11 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { Menu, Search, ShoppingCart } from 'lucide-react';
+import { Menu, Search, ShoppingCart, Heart } from 'lucide-react';
 import { MenuDrawer } from '@/components/navigation/MenuDrawer';
 import { SearchBar } from '@/components/navigation/SearchBar';
+import { Topbar } from '@/components/navigation/Topbar';
+import { CategoryNav } from '@/components/navigation/CategoryNav';
 import { NAVIGATION } from '@/lib/constants/categories';
 import { useCart } from '@/contexts/CartContext';
 
@@ -15,8 +17,13 @@ export function Header() {
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
 
   return (
-    <header className="sticky top-0 z-50 bg-bg-primary/80 backdrop-blur-md border-b border-bg-tertiary">
-      <nav className="container mx-auto px-4 py-4">
+    <header className="sticky top-0 z-50">
+      {/* Topbar - Bar 1 */}
+      <Topbar />
+
+      {/* Main Header - Bar 2 */}
+      <div className="bg-bg-primary/95 backdrop-blur-md border-b border-bg-tertiary">
+        <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
@@ -98,7 +105,8 @@ export function Header() {
             </button>
           </div>
         </div>
-      </nav>
+        </nav>
+      </div>
 
       {/* Menu Drawer (Mobile + Desktop) */}
       <MenuDrawer isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
@@ -117,6 +125,9 @@ export function Header() {
           </div>
         </div>
       )}
+
+      {/* Category Navigation - Bar 3 */}
+      <CategoryNav />
     </header>
   );
 }

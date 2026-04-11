@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { ParticleHero } from '@/components/hero/ParticleHero';
+import { LifestyleSection } from '@/components/sections/LifestyleSection';
 import { CATEGORIES, COLLECTIONS } from '@/lib/constants/categories';
 
 export default function HomePage() {
@@ -113,6 +114,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Lifestyle Section with Parallax */}
+      <LifestyleSection />
 
       {/* CTA Section */}
       <section className="container py-24">
